@@ -1,0 +1,21 @@
+.SearchDiv{
+    margin-top: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    padding-left: 40px;
+
+    /* flex-direction: column; */
+}
+
+.searchButton{
+    margin: 20px;
+}
+
+.mainDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

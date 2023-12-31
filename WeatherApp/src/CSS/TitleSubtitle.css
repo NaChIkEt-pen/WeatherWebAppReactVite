@@ -1,0 +1,9 @@
+.CityDateDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 110px;
+}
+.cityName{
+    margin-bottom: 0%;
+}
