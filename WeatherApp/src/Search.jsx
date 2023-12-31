@@ -4,7 +4,7 @@ import "./CSS/Search.css";
 import { FaSearchLocation } from "react-icons/fa";
 import TitleSubtitle from "./TitleSubtitle";
 import WeatherIcon from "./wetatherIcon";
-
+import ForecastDataMain from "./ForecastDataMain";
 function Search() {
   const API = {
     key: import.meta.env.VITE_APIkey,
@@ -13,6 +13,9 @@ function Search() {
   const [search, setSearch] = useState("");
   const [weatherData, setWeatherData] = useState("");
   const [icon, setIcon] = useState("");
+  const [weather, setWeather] = useState("");
+  const [weatherCord, setWeatherCord] = useState("");
+
   const searchPressed = () => {
     //console.log(search);
     fetch(`${API.baseUrl}weather?q=${search}&units=metric&appid=${API.key}`)
@@ -21,6 +24,8 @@ function Search() {
         //console.log(result);
         setWeatherData(result);
         setIcon(result.weather[0].icon);
+        setWeather(result.weather[0]);
+        setWeatherCord(result.cord);
       });
   };
   return (
@@ -42,6 +47,10 @@ function Search() {
       </div>
 
       <WeatherIcon passedIcon={icon} />
+
+      <h3 className="weatherDescription">{weather.description}</h3>
+
+      <ForecastDataMain passedSearch={weatherData.name} />
     </div>
   );
 }
