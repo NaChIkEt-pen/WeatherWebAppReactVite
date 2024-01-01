@@ -20,6 +20,9 @@
     align-items: center;
 }
 
+.weatherTemp{
+    margin-bottom: 0px;
+}
 .weatherDescription{
     margin-top: 0px;
 }
