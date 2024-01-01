@@ -5,7 +5,7 @@ function TitleSubtitle({ passedData }) {
   const dateData = new Date(
     passedData[1].dt * 1000 - passedData[1].timezone * 1000
   );
-  //const date = `${dateData.getDate()}-${dateData.getMonth()}-${dateData.getFullYear()}`;
+  //const date = `${dateData.get()}-${dateData.getMonth()}-${dateData.getFullYear()}`;
   const options = { day: "numeric", month: "numeric", year: "numeric" };
   const formattedDate = dateData.toLocaleDateString("en-IN", options);
   //console.log(date);

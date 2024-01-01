@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { ReactDOM } from "react";
 
+const list = [];
+const weekday = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
 function ForecastDataMain({ passedSearch }) {
   const API = {
     key: import.meta.env.VITE_APIkey,
@@ -10,6 +20,7 @@ function ForecastDataMain({ passedSearch }) {
   const [cod, setcod] = useState(null);
   useEffect(() => {
     // Fetch data from the API
+
     const fetchData = async () => {
       try {
         const response = await fetch(
@@ -18,7 +29,22 @@ function ForecastDataMain({ passedSearch }) {
         const result = await response.json();
         setForecastData(result);
         setcod(result.cod);
-        console.log(result);
+        //console.log(result);
+        const data = result.list;
+
+        data.forEach((element) => {
+          var obj = {};
+          obj["temp"] = `${element.main.temp} °C`;
+          obj["icon"] = element.weather[0].icon;
+          const dateData = new Date(
+            element.dt * 1000 - result.city.timezone * 1000
+          );
+          obj["day"] = weekday[dateData.getDay()];
+          obj[
+            "time"
+          ] = `${dateData.getHours()}:${dateData.getMinutes()}:${dateData.getSeconds()}`;
+          list.push(obj);
+        });
       } catch (error) {
         // Handle errors
         console.error("Error fetching data:", error);
@@ -30,7 +56,9 @@ function ForecastDataMain({ passedSearch }) {
       fetchData();
     }
   }, [API.key, API.baseUrl, passedSearch]);
-  if (forecastData != null) return <h1>{forecastData.cod}</h1>;
+  //
+
+  if (forecastData != null) return <>{console.log(list)}</>;
   else return null;
 }
 

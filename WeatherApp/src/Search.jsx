@@ -18,6 +18,7 @@ function Search() {
   const [weather, setWeather] = useState("");
   const [weatherCord, setWeatherCord] = useState("");
   const [temp, setTemp] = useState("");
+
   const searchPressed = () => {
     //console.log(search);
     fetch(`${API.baseUrl}weather?q=${search}&units=metric&appid=${API.key}`)
