@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { ReactDOM } from "react";
-
+//import ForecastCarousel from "./ForecastCarousel.jsx";
+import Carousel from "react-multi-carousel";
+import ForecastCard from "./ForecastCard";
 const list = [];
 const weekday = [
   "Sunday",
@@ -11,6 +13,28 @@ const weekday = [
   "Friday",
   "Saturday",
 ];
+
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 4,
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3,
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2,
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+  },
+};
+
+var ctr = 0;
 function ForecastDataMain({ passedSearch }) {
   const API = {
     key: import.meta.env.VITE_APIkey,
@@ -24,7 +48,7 @@ function ForecastDataMain({ passedSearch }) {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `${API.baseUrl}forecast?q=${passedSearch}&units=metric&appid=${API.key}`
+          `${API.baseUrl}forecast?q=${passedSearch.name}&units=metric&appid=${API.key}`
         );
         const result = await response.json();
         setForecastData(result);
@@ -58,8 +82,12 @@ function ForecastDataMain({ passedSearch }) {
   }, [API.key, API.baseUrl, passedSearch]);
   //
 
-  if (forecastData != null) return <>{console.log(list)}</>;
-  else return null;
+  // if (forecastData != null && ctr == 0) {
+  //   ctr = ctr + 1;
+  // }
+  list.forEach((element) => {
+    return <ForecastCard props={element} />;
+  });
 }
 
 export default ForecastDataMain;

@@ -56,7 +56,7 @@ function Search() {
 
       <h3 className="weatherDescription">{weather.description}</h3>
 
-      <ForecastDataMain passedSearch={weatherData.name} />
+      <ForecastDataMain passedSearch={weatherData} />
     </div>
   );
 }
